@@ -4,6 +4,7 @@ import com.faqmanager.faqmanager.model.Category;
 import com.faqmanager.faqmanager.model.Question;
 import com.faqmanager.faqmanager.repository.CategoryRepository;
 import com.faqmanager.faqmanager.repository.QuestionsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,13 @@ import java.util.Optional;
 
 @Service
 public class QuestionService {
-    private QuestionsRepository questionsRepository;
+
+    private final QuestionsRepository questionsRepository;
+
+    @Autowired
+    public QuestionService(QuestionsRepository questionsRepository) {
+        this.questionsRepository = questionsRepository;
+    }
 
     public Optional<Question> getQuestionById (Long id) {
         return questionsRepository.findById(id);
