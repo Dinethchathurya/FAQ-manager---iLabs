@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#remove env files
+
+.env
+
+pgdata/
