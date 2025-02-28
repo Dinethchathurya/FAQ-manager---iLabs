@@ -4,7 +4,7 @@ function SearchSectionComponent() {
   return (
     <>
       <div className="container">
-        <div className="search-background mb-3 p-3">
+        <div className="search-background mb-4 p-3">
           <div className="d-flex">
             <input
               type="text"
