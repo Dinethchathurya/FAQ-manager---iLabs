@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "questions")
-public class Questions {
+public class Question {
 
 
     @Id
@@ -25,6 +25,8 @@ public class Questions {
     @Column(nullable = false)
     private String status;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String action;
+
+
 }
