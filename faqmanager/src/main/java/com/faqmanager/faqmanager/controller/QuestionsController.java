@@ -3,6 +3,7 @@ package com.faqmanager.faqmanager.controller;
 import com.faqmanager.faqmanager.model.Question;
 import com.faqmanager.faqmanager.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +13,13 @@ import java.util.Optional;
 @RequestMapping("/api/faqmanager/questions")
 public class QuestionsController {
 
+
+    private final QuestionService questionService;
+
     @Autowired
-    private QuestionService questionService;
+    public QuestionsController(QuestionService questionService) {
+        this.questionService = questionService;
+    }
 
     @GetMapping
     public List<Question> findAll(){
