@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { categories } from "../const";
 
 // Async Thunks for API calls
 export const fetchFaqs = createAsyncThunk("faq/fetchFaqs", async () => {
@@ -14,6 +15,7 @@ export const addQuestion = createAsyncThunk("faq/addQuestion", async (newQuestio
     },
     body: JSON.stringify(newQuestion),
   });
+  console.log(JSON.stringify(newQuestion));
   return response.json();
 });
 
@@ -61,13 +63,24 @@ const faqSlice = createSlice({
       
       // Add Question
       .addCase(addQuestion.fulfilled, (state, action) => {
-        state.data.push(action.payload);
+        const newQuestion = action.payload;
+        newQuestion.categoryId =
+          typeof newQuestion.categoryId === "string"
+            ? newQuestion.categoryId
+            : categories.find((cat) => cat.id === newQuestion.categoryId?.id)?.name || "Unknown";
+
+        state.data.push(newQuestion);
       })
 
-      // Update Question
+      // ✅ Convert `categoryId` from ID to Name before updating Redux store
       .addCase(updateQuestion.fulfilled, (state, action) => {
         const index = state.data.findIndex((q) => q.id === action.payload.id);
         if (index !== -1) {
+          action.payload.categoryId =
+            typeof action.payload.categoryId === "string"
+              ? action.payload.categoryId
+              : categories.find((cat) => cat.id === action.payload.categoryId?.id)?.name || "Unknown";
+
           state.data[index] = action.payload;
         }
       })

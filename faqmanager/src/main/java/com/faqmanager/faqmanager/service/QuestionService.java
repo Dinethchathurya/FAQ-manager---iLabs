@@ -1,8 +1,7 @@
 package com.faqmanager.faqmanager.service;
 
-import com.faqmanager.faqmanager.model.Category;
 import com.faqmanager.faqmanager.model.Question;
-import com.faqmanager.faqmanager.repository.CategoryRepository;
+
 import com.faqmanager.faqmanager.repository.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
