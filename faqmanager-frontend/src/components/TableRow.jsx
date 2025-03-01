@@ -1,19 +1,21 @@
 import TableDataDropDown from "./TableDataDropDown";
 
-const TableRow = (props) => {
-    return (
-        <>
-            <tr>
-                <td>{props.id}</td>
-                <td>{props.question}</td>
-                <td>{props.category}</td>
-                <td>
-                <span className="badge status light-green">{props.status}</span>
-                </td>
-                <TableDataDropDown />
-            
-            </tr>
-        </>
-    );
+const TableRow = ({ id, question, category, status }) => {
+  return (
+    <tr>
+      <td>{id}</td>
+      <td>{question}</td>
+      <td>{category}</td>
+      <td>
+        <span className={`badge ${status === "Published" ? "light-green" : "light-gray"}`}>
+          {status}
+        </span>
+      </td>
+      <td>
+        <TableDataDropDown /> 
+      </td>
+    </tr>
+  );
 };
+
 export default TableRow;

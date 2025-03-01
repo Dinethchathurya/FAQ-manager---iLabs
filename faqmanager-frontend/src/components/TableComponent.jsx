@@ -1,5 +1,8 @@
 import TableHead from "./TableHead";
 import TableRow from "./TableRow";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFaqs } from "../redux/faqSlice";
+import { useEffect } from "react";
 
 const TableComponent = () => {
 
@@ -10,6 +13,15 @@ const TableComponent = () => {
     "Status",
     "Action",
   ];
+
+  const dispatch = useDispatch();
+  const { data: faqList, status, error } = useSelector((state) => state.faq); // Get FAQs from Redux store
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchFaqs()); // Fetch FAQs when the component mounts
+    }
+  }, [status, dispatch]);
 
   return (
 
@@ -28,73 +40,26 @@ const TableComponent = () => {
 
         </thead>
         <tbody>
-          <TableRow 
-            id = "1"
-            question = "What is the vision of iLabs?"
-            category = "About Company"
-            status = "Published"
-
-          />
-          <tr>
-            <td>2</td>
-            <td>What is the mission of iLabs?</td>
-            <td>About Company</td>
-            <td>
-              <span className="badge status light-green">Published</span>
-            </td>
-            <td>
-              <div className="dropdown">
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      View
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Deactivate
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item text-danger" href="#">
-                      Delete
-                    </a>
-                  </li>
-                </ul>
-                ...
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>When was iLabs established?</td>
-            <td>About Company</td>
-            <td>
-              <span className="badge text-dark status light-gray">Draft</span>
-            </td>
-            <td>
-            <div className="dropdown">
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      View
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Deactivate
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item text-danger" href="#">
-                      Delete
-                    </a>
-                  </li>
-                </ul>
-                ...
-              </div>
-            </td>
-          </tr>
+          {status === "loading" && (
+            <tr>
+              <td colSpan="5">Loading...</td>
+            </tr>
+          )}
+          {error && (
+            <tr>
+              <td colSpan="5">Error: {error}</td>
+            </tr>
+          )}
+          {faqList.length > 0 &&
+            faqList.map((faq) => (
+              <TableRow
+                key={faq.id} 
+                id={faq.id}
+                question={faq.question}
+                category={faq.categoryId?.category || "N/A"}
+                status={faq.status}
+              />
+            ))}
         </tbody>
       </table>
     </>

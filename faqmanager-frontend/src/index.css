@@ -55,10 +55,13 @@ body {
 
 .light-gray {
   background-color: #E0E0E0;
+  color: #1f2937;
+  padding: 10px;
 }
 .light-green {
   background-color: #67AD5B;
   color: black;
+  padding: 10px;
 }
 
 .dropdown {
