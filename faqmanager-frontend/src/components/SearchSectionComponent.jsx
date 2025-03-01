@@ -1,4 +1,6 @@
 import React from "react";
+import SearchButton from "./SearchButton";
+import SearchInputButton from "./SearchInputButton";
 
 function SearchSectionComponent() {
   return (
@@ -6,12 +8,15 @@ function SearchSectionComponent() {
       <div className="container">
         <div className="search-background mb-4 p-3">
           <div className="d-flex">
-            <input
-              type="text"
-              className="form-control w-75 me-2 light-blue"
-              placeholder="Search..."
+            <SearchInputButton 
+              type="text" 
+              placeholder="Search..." 
             />
-            <button className="btn dark-blue w-25">Search</button>
+
+            <SearchButton 
+              name="Search" 
+            />
+
           </div>
         </div>
       </div>

@@ -1,22 +1,24 @@
 import { useState } from "react";
-import Header from "./components/Header";
-import SearchSectionComponent from "./components/SearchSectionComponent";
-import TableComponent from "./components/TableComponent";
-import TableBottomComponent from "./components/TableBottomComponent";
-import FooterComponent from "./components/FooterComponent";
+import HomePage from "./pages/HomePage";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+import { BrowserRouter,Routes, Route } from "react-router";
 
 function App() {
   return (
-    <>
-      <Header />
-      <SearchSectionComponent />
-      <div className="container ">
-        <TableComponent />
-        <TableBottomComponent />
-      </div>
-
-      <FooterComponent />
-      
+    <>      
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          
+          {/* <Route path="dashboard" element={<Dashboard />}>
+            <Route index element={<RecentActivity />} />
+            <Route path="project/:id" element={<Project />} />
+          </Route> */}
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
