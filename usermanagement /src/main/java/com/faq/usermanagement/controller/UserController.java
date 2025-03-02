@@ -5,9 +5,9 @@ import com.faq.usermanagement.model.User;
 import com.faq.usermanagement.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/auth")
+
 public class UserController {
     private final UserService userService;
 
@@ -15,7 +15,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    // ✅ Register User
+    //Register User
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
@@ -26,7 +26,7 @@ public class UserController {
         }
     }
 
-    // ✅ Login User
+    //Login User
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
         try {
