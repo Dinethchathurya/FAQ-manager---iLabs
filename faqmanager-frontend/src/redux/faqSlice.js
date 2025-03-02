@@ -50,7 +50,7 @@ const faqSlice = createSlice({
     filterQuestions: (state, action) => {
         const query = action.payload.toLowerCase();
         if (!query) {
-          state.data = state.allData; // ✅ Restore full data if search is empty
+          state.data = state.allData; //  Restore full data if search is empty
         } else {
           state.data = state.allData.filter((question) =>
             question.question.toLowerCase().includes(query)
@@ -83,7 +83,7 @@ const faqSlice = createSlice({
             : categories.find((cat) => cat.id === newQuestion.categoryId?.id)?.name || "Unknown";
 
         state.data.push(newQuestion);
-        state.allData.push(newQuestion); // ✅ Update backup data
+        state.allData.push(newQuestion); // Update backup data
       })
 
       // Convert `categoryId` from ID to Name before updating Redux store
