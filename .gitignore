@@ -27,3 +27,6 @@ hs_err_pid*
 replay_pid*
 faqmanager/.env
 .DS_Store
+.DS_Store
+usermanagement /.env
+usermanagement /pgdata

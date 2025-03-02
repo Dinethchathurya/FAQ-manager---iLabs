@@ -1,0 +1,86 @@
+:root {
+  --background-color: #E8EAF5;
+}
+body {
+  background-color: var(--background-color);
+  color: #1f2937;
+  font-family: Arial, sans-serif;
+}
+.btn-primary {
+  background-color: #1e3a8a;
+  border-color: #1e3a8a;
+  box-shadow: 0 3px 6px rgba(30, 58, 138, 0.3);
+}
+.btn-primary:hover {
+  background-color: #152c5b;
+}
+.badge-success {
+  background-color: #198754;
+}
+.badge-warning {
+  background-color: #ffc107;
+  color: black;
+}
+.table th, .table td {
+  vertical-align: middle;
+}
+.dropdown-menu {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+.shadow-custom {
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); 
+}
+.add-question-button {
+  background-color: #C6CAE6;
+}
+.dark-blue{
+  background-color: #4350AF;
+  color: white;
+}
+.search-background{
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+.light-blue{
+  background-color: #E8EAF5;
+}
+.page-number{
+  border-radius: 0;
+}
+
+.status {
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.light-gray {
+  background-color: #E0E0E0;
+  color: #1f2937;
+  padding: 10px;
+}
+.light-green {
+  background-color: #67AD5B;
+  color: black;
+  padding: 10px;
+}
+
+.dropdown {
+  position: relative; /* Ensures dropdown stays positioned properly */
+}
+
+.dropdown-menu {
+  display: none; /* Initially hidden */
+  position: absolute !important; /* Prevents clipping */
+  z-index: 1050 !important; /* Ensures it stays above other elements */
+  transform: translateY(5px); /* Moves dropdown slightly down */
+  background: white; /* Ensures visibility */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block; /* Makes dropdown visible on hover */
+}
+
+.table-responsive {
+  overflow: visible !important; /* Prevents dropdown clipping */
+}
