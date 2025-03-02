@@ -41,11 +41,23 @@ export const deleteQuestion = createAsyncThunk("faq/deleteQuestion", async (id) 
 const faqSlice = createSlice({
   name: "faq",
   initialState: {
-    data: [],
+    data: [], //Current displayed questions
+    allData: [], // Backup of all questions
     status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
   },
-  reducers: {}, // No need for reducers since we use async actions
+  reducers: {
+    filterQuestions: (state, action) => {
+        const query = action.payload.toLowerCase();
+        if (!query) {
+          state.data = state.allData; // ✅ Restore full data if search is empty
+        } else {
+          state.data = state.allData.filter((question) =>
+            question.question.toLowerCase().includes(query)
+          );
+        }
+      },
+  }, // No need for reducers since we use async actions
   extraReducers: (builder) => {
     builder
       // Fetch FAQs
@@ -54,6 +66,7 @@ const faqSlice = createSlice({
       })
       .addCase(fetchFaqs.fulfilled, (state, action) => {
         state.status = "succeeded";
+        state.allData = action.payload; 
         state.data = action.payload;
       })
       .addCase(fetchFaqs.rejected, (state, action) => {
@@ -70,9 +83,10 @@ const faqSlice = createSlice({
             : categories.find((cat) => cat.id === newQuestion.categoryId?.id)?.name || "Unknown";
 
         state.data.push(newQuestion);
+        state.allData.push(newQuestion); // ✅ Update backup data
       })
 
-      // ✅ Convert `categoryId` from ID to Name before updating Redux store
+      // Convert `categoryId` from ID to Name before updating Redux store
       .addCase(updateQuestion.fulfilled, (state, action) => {
         const index = state.data.findIndex((q) => q.id === action.payload.id);
         if (index !== -1) {
@@ -89,7 +103,10 @@ const faqSlice = createSlice({
       .addCase(deleteQuestion.fulfilled, (state, action) => {
         state.data = state.data.filter((q) => q.id !== action.payload);
       });
+
+
   },
 });
 
+export const { filterQuestions } = faqSlice.actions; 
 export default faqSlice.reducer;
