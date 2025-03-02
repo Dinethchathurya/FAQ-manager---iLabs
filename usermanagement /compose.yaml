@@ -1,0 +1,25 @@
+services:
+  postgres2:
+    image: 'postgres:latest'
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '5001:5432'
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: usermanagement-pgadmin
+    restart: always
+    environment:
+      - 'PGADMIN_DEFAULT_EMAIL=admin@example.com'
+      - 'PGADMIN_DEFAULT_PASSWORD=admin'
+    ports:
+      - "5051:80"
+    depends_on:
+      - postgres2
+
+volumes:
+  pgdata:
