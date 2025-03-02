@@ -1,4 +1,13 @@
-const TableDataDropDown = ()=> {
+import { useDispatch } from "react-redux";
+import { deleteQuestion } from "../redux/faqSlice";
+
+const TableDataDropDown = (props)=> {
+
+    const dispatch = useDispatch();
+
+    function deleteThis() {
+        dispatch(deleteQuestion(props.id));
+    }
 
     return (
         <div className="dropdown">
@@ -14,7 +23,7 @@ const TableDataDropDown = ()=> {
                     </a>
                 </li>
                 <li>
-                    <a className="dropdown-item text-danger" href="#">
+                    <a className="dropdown-item text-danger" onClick={deleteThis} href="#">
                     Delete
                     </a>
                 </li>

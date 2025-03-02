@@ -12,7 +12,9 @@ const TableRow = ({ id, question, category, status }) => {
         </span>
       </td>
       <td>
-        <TableDataDropDown /> 
+        <TableDataDropDown 
+          id = {id}
+        /> 
       </td>
     </tr>
   );
